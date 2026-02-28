@@ -10,20 +10,20 @@
   <meta property="og:description" content="Desarrollador backend. Proyectos reales, código limpio, enfoque en automatización.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://julian-correa.github.io">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2328;</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0e0e0e;
-      --surface: #161616;
-      --border: #222;
-      --text: #e8e4dc;
-      --muted: #666;
-      --accent: #c8f060;
-      --accent2: #f0c060;
+      --bg:      #07111f;
+      --surface: #0c1b30;
+      --border:  #162840;
+      --text:    #ddeaf8;
+      --muted:   #5d83a8;
+      --accent:  #3ecfb2;
+      --accent2: #6ab4f5;
     }
 
     html { scroll-behavior: smooth; }
@@ -37,18 +37,7 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: .5;
-    }
-
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -58,7 +47,7 @@
       align-items: center;
       padding: 1.4rem 3rem;
       border-bottom: 1px solid var(--border);
-      background: rgba(14,14,14,.85);
+      background: rgba(7,17,31,.9);
       backdrop-filter: blur(12px);
     }
     .nav-logo {
@@ -66,7 +55,6 @@
       font-size: 1.1rem;
       color: var(--text);
       text-decoration: none;
-      letter-spacing: -.5px;
     }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
@@ -79,15 +67,18 @@
     }
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
+    /* HERO */
     #hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 8rem 3rem 4rem;
+      padding: 8rem 3rem 5rem;
       border-bottom: 1px solid var(--border);
       position: relative;
+      background:
+        radial-gradient(ellipse 80% 50% at 60% 40%, rgba(62,207,178,.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(106,180,245,.04) 0%, transparent 60%);
     }
 
     .hero-status {
@@ -108,7 +99,7 @@
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .4; transform: scale(.8); }
+      50%       { opacity: .35; transform: scale(.75); }
     }
 
     .hero-name {
@@ -118,10 +109,7 @@
       letter-spacing: -.03em;
       margin-bottom: 1.5rem;
     }
-    .hero-name em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .hero-name em { font-style: italic; color: var(--accent); }
 
     .hero-sub {
       max-width: 480px;
@@ -134,9 +122,8 @@
     .hero-cta {
       display: inline-flex;
       align-items: center;
-      gap: .8rem;
       background: var(--accent);
-      color: #0e0e0e;
+      color: #07111f;
       text-decoration: none;
       font-size: .75rem;
       font-weight: 500;
@@ -149,8 +136,7 @@
 
     .hero-scroll {
       position: absolute;
-      right: 3rem;
-      bottom: 4rem;
+      right: 3rem; bottom: 4rem;
       writing-mode: vertical-rl;
       font-size: .65rem;
       color: var(--muted);
@@ -163,13 +149,13 @@
     .hero-scroll::after {
       content: '';
       display: block;
-      width: 1px;
-      height: 60px;
+      width: 1px; height: 60px;
       background: var(--border);
     }
 
-    /* ── SECTION BASE ── */
+    /* SECTIONS */
     section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); }
+
     .section-label {
       font-size: .65rem;
       letter-spacing: .2em;
@@ -180,19 +166,15 @@
       align-items: center;
       gap: 1rem;
     }
-    .section-label::before {
-      content: attr(data-num);
-      color: var(--accent);
-    }
+    .section-label::before { content: attr(data-num); color: var(--accent); }
 
-    /* ── ABOUT ── */
+    /* ABOUT */
     #about {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: start;
     }
-    .about-left {}
     .about-heading {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2rem, 5vw, 3.5rem);
@@ -207,7 +189,6 @@
     }
     .about-text + .about-text { margin-top: 1.2rem; }
 
-    .about-right {}
     .skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -227,8 +208,7 @@
     .skill-tag:hover { border-color: var(--accent); color: var(--text); }
     .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
-    /* ── PROJECTS ── */
-    #projects {}
+    /* PROJECTS */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -238,7 +218,6 @@
     .project-card {
       background: var(--surface);
       padding: 2.5rem;
-      border: none;
       text-decoration: none;
       color: inherit;
       display: flex;
@@ -256,31 +235,32 @@
       background: var(--accent);
       transition: width .3s ease;
     }
-    .project-card:hover { background: #1a1a1a; }
+    .project-card:hover { background: #112240; }
     .project-card:hover::after { width: 100%; }
 
     .project-featured {
       grid-column: 1 / -1;
-      background: #131610;
+      background: #0a1c35;
       border-left: 2px solid var(--accent);
     }
-    .project-featured:hover { background: #161a0f; }
-    .featured-badge {
-      background: var(--accent);
-      color: #0e0e0e;
-      font-size: .6rem;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: .15rem .5rem;
-      margin-left: .6rem;
-      vertical-align: middle;
-    }
+    .project-featured:hover { background: #0e2244; }
 
     .project-num {
       font-size: .65rem;
       color: var(--accent);
       letter-spacing: .15em;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .featured-badge {
+      background: var(--accent);
+      color: #07111f;
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .15rem .5rem;
     }
     .project-title {
       font-family: 'DM Serif Display', serif;
@@ -293,12 +273,7 @@
       line-height: 1.8;
       flex: 1;
     }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-      margin-top: auto;
-    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
     .tag {
       font-size: .65rem;
       letter-spacing: .08em;
@@ -307,24 +282,29 @@
       padding: .25rem .6rem;
       text-transform: uppercase;
     }
+    .project-actions { display: flex; gap: 1.2rem; align-items: center; margin-top: .25rem; }
     .project-link {
       font-size: .7rem;
       color: var(--accent);
       letter-spacing: .1em;
       text-transform: uppercase;
-      margin-top: .5rem;
-      display: flex;
-      align-items: center;
-      gap: .4rem;
+      text-decoration: none;
     }
-    .project-link::after { content: '→'; }
+    .project-link::after { content: ' →'; }
+    .project-link-alt {
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .project-link-alt:hover { color: var(--accent); border-color: var(--accent); }
 
-    /* ── CONTACT ── */
-    #contact {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+    /* CONTACT */
+    #contact { display: flex; flex-direction: column; align-items: flex-start; }
     .contact-heading {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2.5rem, 7vw, 5rem);
@@ -332,12 +312,7 @@
       margin-bottom: 2rem;
     }
     .contact-heading em { font-style: italic; color: var(--accent); }
-    .contact-links {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
+    .contact-links { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
     .contact-link {
       color: var(--muted);
       text-decoration: none;
@@ -350,7 +325,7 @@
     }
     .contact-link:hover { color: var(--accent); border-color: var(--accent); }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
       padding: 2rem 3rem;
       display: flex;
@@ -361,15 +336,11 @@
       letter-spacing: .1em;
     }
 
-    /* ── ANIMATIONS ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
 
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { gap: 1.5rem; }
@@ -382,7 +353,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-logo">JC.</a>
     <ul class="nav-links">
@@ -392,7 +362,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-status">
       <span class="status-dot"></span>
@@ -411,7 +380,6 @@
     <div class="hero-scroll">scroll</div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about-left fade-in">
       <p class="section-label" data-num="01">Sobre mí</p>
@@ -441,12 +409,10 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects">
     <p class="section-label fade-in" data-num="02">Proyectos</p>
     <div class="projects-grid">
 
-      <!-- FEATURED: ISP-Portal -->
       <a href="https://github.com/Julian-Correa/ISP-Portal" target="_blank" class="project-card project-featured fade-in">
         <span class="project-num">001 <span class="featured-badge">Destacado</span></span>
         <h3 class="project-title">Portal OriNet</h3>
@@ -454,7 +420,7 @@
           Portal de clientes en producción para un ISP. Los usuarios ingresan con su DNI
           y consultan su deuda, estado del servicio, próxima fecha de corte y datos de pago.
           Integrado con la API de ISPCube mediante autenticación Bearer en dos pasos.
-          Incluye descarga de facturas PDF, botones de contacto por WhatsApp y diseño responsive completo.
+          Incluye descarga de facturas PDF, contacto por WhatsApp y diseño responsive completo.
         </p>
         <div class="project-tags">
           <span class="tag">React 18</span>
@@ -462,9 +428,9 @@
           <span class="tag">REST API</span>
           <span class="tag">Netlify</span>
         </div>
-        <div style="display:flex;gap:1rem;margin-top:.5rem;align-items:center;">
+        <div class="project-actions">
           <span class="project-link">Ver repositorio</span>
-          <a href="https://portal-orinet.netlify.app/" target="_blank" onclick="event.stopPropagation()" style="font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color .2s,border-color .2s;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">Ver demo ↗</a>
+          <a href="https://portal-orinet.netlify.app/" target="_blank" onclick="event.stopPropagation()" class="project-link-alt">Ver demo ↗</a>
         </div>
       </a>
 
@@ -472,54 +438,56 @@
         <span class="project-num">002</span>
         <h3 class="project-title">Página de Festival</h3>
         <p class="project-desc">
-          Sitio web para un festival de música desarrollado con SASS y JavaScript.
-          Diseño responsive con componentes reutilizables y arquitectura de estilos modular
-          usando metodologías de CSS avanzado.
+          Sitio web para un festival de música con SASS y JavaScript.
+          Diseño responsive con componentes reutilizables y arquitectura de estilos modular.
         </p>
         <div class="project-tags">
           <span class="tag">SASS</span>
           <span class="tag">JavaScript</span>
           <span class="tag">Responsive</span>
         </div>
-        <span class="project-link">Ver repositorio</span>
+        <div class="project-actions">
+          <span class="project-link">Ver repositorio</span>
+        </div>
       </a>
 
       <a href="https://github.com/Julian-Correa/Blog-Cafe" target="_blank" class="project-card fade-in">
         <span class="project-num">003</span>
         <h3 class="project-title">Blog Café</h3>
         <p class="project-desc">
-          Blog temático maquetado en HTML y CSS puro. Proyecto con enfoque en
-          estructura semántica, buenas prácticas de marcado y composición visual
-          cuidada sin frameworks externos.
+          Blog temático maquetado en HTML y CSS puro, con enfoque en estructura semántica
+          y buenas prácticas de marcado sin frameworks externos.
         </p>
         <div class="project-tags">
           <span class="tag">HTML</span>
           <span class="tag">CSS</span>
           <span class="tag">Semántica</span>
         </div>
-        <span class="project-link">Ver repositorio</span>
+        <div class="project-actions">
+          <span class="project-link">Ver repositorio</span>
+        </div>
       </a>
 
       <a href="https://github.com/Julian-Correa/java-seccion-3" target="_blank" class="project-card fade-in">
         <span class="project-num">004</span>
         <h3 class="project-title">Java — Backend</h3>
         <p class="project-desc">
-          Ejercicios y pruebas de Java explorando POO, estructuras de datos y lógica
-          backend. Base de conocimiento en el lenguaje core para construir sistemas
-          robustos y escalables.
+          Ejercicios de Java explorando POO, estructuras de datos y lógica backend.
+          Base en el lenguaje core para construir sistemas robustos y escalables.
         </p>
         <div class="project-tags">
           <span class="tag">Java</span>
           <span class="tag">POO</span>
           <span class="tag">Backend</span>
         </div>
-        <span class="project-link">Ver repositorio</span>
+        <div class="project-actions">
+          <span class="project-link">Ver repositorio</span>
+        </div>
       </a>
 
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <p class="section-label fade-in" data-num="03">Contacto</p>
     <h2 class="contact-heading fade-in">
@@ -535,22 +503,24 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <span>© 2026 Julian Correa</span>
     <span>Diseñado y desarrollado con cuidado.</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Fade in on scroll
+  <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
-          // stagger children
           const siblings = [...e.target.parentElement.querySelectorAll('.fade-in:not(.visible)')];
-          siblings.forEach((s, i) => {
-            setTimeout(() => s.classList.add('visible'), i * 100);
-          });
+          siblings.forEach((s, i) => setTimeout(() => s.classList.add('visible'), i * 120));
         }
-    
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
