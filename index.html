@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Julian Correa — Developer</title>
+  <meta name="description" content="Desarrollador backend enfocado en construir sistemas robustos. Especialización futura en automatización de procesos.">
+  <meta name="author" content="Julian Correa">
+  <meta property="og:title" content="Julian Correa — Developer">
+  <meta property="og:description" content="Desarrollador backend. Proyectos reales, código limpio, enfoque en automatización.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://julian-correa.github.io">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #222;
+      --text: #e8e4dc;
+      --muted: #666;
+      --accent: #c8f060;
+      --accent2: #f0c060;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14,14,14,.85);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -.5px;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.8); }
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      max-width: 480px;
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      background: var(--accent);
+      color: #0e0e0e;
+      text-decoration: none;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .9rem 2rem;
+      transition: background .2s, transform .2s;
+    }
+    .hero-cta:hover { background: var(--accent2); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute;
+      right: 3rem;
+      bottom: 4rem;
+      writing-mode: vertical-rl;
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 60px;
+      background: var(--border);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); }
+    .section-label {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::before {
+      content: attr(data-num);
+      color: var(--accent);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-left {}
+    .about-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+    .about-text {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 440px;
+    }
+    .about-text + .about-text { margin-top: 1.2rem; }
+
+    .about-right {}
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+    }
+    .skill-tag {
+      border: 1px solid var(--border);
+      padding: .6rem 1rem;
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      transition: border-color .2s, color .2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--text); }
+    .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── PROJECTS ── */
+    #projects {}
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+    }
+    .project-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      border: none;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width .3s ease;
+    }
+    .project-card:hover { background: #1a1a1a; }
+    .project-card:hover::after { width: 100%; }
+
+    .project-featured {
+      grid-column: 1 / -1;
+      background: #131610;
+      border-left: 2px solid var(--accent);
+    }
+    .project-featured:hover { background: #161a0f; }
+    .featured-badge {
+      background: var(--accent);
+      color: #0e0e0e;
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .15rem .5rem;
+      margin-left: .6rem;
+      vertical-align: middle;
+    }
+
+    .project-num {
+      font-size: .65rem;
+      color: var(--accent);
+      letter-spacing: .15em;
+    }
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      line-height: 1.2;
+    }
+    .project-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.8;
+      flex: 1;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: auto;
+    }
+    .tag {
+      font-size: .65rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: .25rem .6rem;
+      text-transform: uppercase;
+    }
+    .project-link {
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .project-link::after { content: '→'; }
+
+    /* ── CONTACT ── */
+    #contact {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .contact-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      line-height: 1;
+      margin-bottom: 2rem;
+    }
+    .contact-heading em { font-style: italic; color: var(--accent); }
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .contact-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .3rem;
+      transition: color .2s, border-color .2s;
+    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      #about { grid-template-columns: 1fr; }
+      .hero-scroll { display: none; }
+      footer { flex-direction: column; gap: .8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">JC.</a>
+    <ul class="nav-links">
+      <li><a href="#about">Sobre mí</a></li>
+      <li><a href="#projects">Proyectos</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-status">
+      <span class="status-dot"></span>
+      Disponible para trabajar
+    </div>
+    <h1 class="hero-name fade-in">
+      Julian<br><em>Correa</em>
+    </h1>
+    <p class="hero-sub fade-in">
+      Desarrollador backend enfocado en construir sistemas robustos.<br>
+      En camino hacia la automatización de procesos y flujos de trabajo.
+    </p>
+    <a href="https://github.com/Julian-Correa" target="_blank" class="hero-cta fade-in">
+      Ver GitHub
+    </a>
+    <div class="hero-scroll">scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-left fade-in">
+      <p class="section-label" data-num="01">Sobre mí</p>
+      <h2 class="about-heading">Construyo cosas<br>que funcionan.</h2>
+      <p class="about-text">
+        Estudiante de Tecnicatura en Programación Informática con pasión por el backend y las
+        soluciones que escalan. Me interesan los sistemas bien diseñados, el código limpio y
+        los procesos que se pueden automatizar.
+      </p>
+      <p class="about-text">
+        Mi objetivo a futuro es especializarme en automatización — desde pipelines de datos
+        hasta bots y scripts que eliminen trabajo repetitivo y agreguen valor real.
+      </p>
+    </div>
+    <div class="about-right fade-in">
+      <p class="section-label" data-num="—">Tecnologías</p>
+      <div class="skills-grid">
+        <div class="skill-tag"><span class="skill-dot"></span>Java</div>
+        <div class="skill-tag"><span class="skill-dot"></span>JavaScript</div>
+        <div class="skill-tag"><span class="skill-dot"></span>HTML / CSS</div>
+        <div class="skill-tag"><span class="skill-dot"></span>SASS</div>
+        <div class="skill-tag"><span class="skill-dot"></span>Git / GitHub</div>
+        <div class="skill-tag"><span class="skill-dot"></span>SQL</div>
+        <div class="skill-tag"><span class="skill-dot"></span>REST APIs</div>
+        <div class="skill-tag"><span class="skill-dot"></span>Automatización</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label fade-in" data-num="02">Proyectos</p>
+    <div class="projects-grid">
+
+      <!-- FEATURED: ISP-Portal -->
+      <a href="https://github.com/Julian-Correa/ISP-Portal" target="_blank" class="project-card project-featured fade-in">
+        <span class="project-num">001 <span class="featured-badge">Destacado</span></span>
+        <h3 class="project-title">Portal OriNet</h3>
+        <p class="project-desc">
+          Portal de clientes en producción para un ISP. Los usuarios ingresan con su DNI
+          y consultan su deuda, estado del servicio, próxima fecha de corte y datos de pago.
+          Integrado con la API de ISPCube mediante autenticación Bearer en dos pasos.
+          Incluye descarga de facturas PDF, botones de contacto por WhatsApp y diseño responsive completo.
+        </p>
+        <div class="project-tags">
+          <span class="tag">React 18</span>
+          <span class="tag">Vite</span>
+          <span class="tag">REST API</span>
+          <span class="tag">Netlify</span>
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:.5rem;align-items:center;">
+          <span class="project-link">Ver repositorio</span>
+          <a href="https://portal-orinet.netlify.app/" target="_blank" onclick="event.stopPropagation()" style="font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color .2s,border-color .2s;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">Ver demo ↗</a>
+        </div>
+      </a>
+
+      <a href="https://github.com/Julian-Correa/pagina-de-festival" target="_blank" class="project-card fade-in">
+        <span class="project-num">002</span>
+        <h3 class="project-title">Página de Festival</h3>
+        <p class="project-desc">
+          Sitio web para un festival de música desarrollado con SASS y JavaScript.
+          Diseño responsive con componentes reutilizables y arquitectura de estilos modular
+          usando metodologías de CSS avanzado.
+        </p>
+        <div class="project-tags">
+          <span class="tag">SASS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Responsive</span>
+        </div>
+        <span class="project-link">Ver repositorio</span>
+      </a>
+
+      <a href="https://github.com/Julian-Correa/Blog-Cafe" target="_blank" class="project-card fade-in">
+        <span class="project-num">003</span>
+        <h3 class="project-title">Blog Café</h3>
+        <p class="project-desc">
+          Blog temático maquetado en HTML y CSS puro. Proyecto con enfoque en
+          estructura semántica, buenas prácticas de marcado y composición visual
+          cuidada sin frameworks externos.
+        </p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Semántica</span>
+        </div>
+        <span class="project-link">Ver repositorio</span>
+      </a>
+
+      <a href="https://github.com/Julian-Correa/java-seccion-3" target="_blank" class="project-card fade-in">
+        <span class="project-num">004</span>
+        <h3 class="project-title">Java — Backend</h3>
+        <p class="project-desc">
+          Ejercicios y pruebas de Java explorando POO, estructuras de datos y lógica
+          backend. Base de conocimiento en el lenguaje core para construir sistemas
+          robustos y escalables.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Java</span>
+          <span class="tag">POO</span>
+          <span class="tag">Backend</span>
+        </div>
+        <span class="project-link">Ver repositorio</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label fade-in" data-num="03">Contacto</p>
+    <h2 class="contact-heading fade-in">
+      Hablemos de<br>tu <em>proyecto.</em>
+    </h2>
+    <p class="about-text fade-in" style="max-width:420px;">
+      Abierto a oportunidades, freelance, o simplemente charlar sobre tecnología y automatización.
+    </p>
+    <div class="contact-links fade-in">
+      <a href="https://github.com/Julian-Correa" target="_blank" class="contact-link">GitHub</a>
+      <a href="mailto:juliancorrea1403@gmail.com" class="contact-link">Email</a>
+      <a href="https://www.linkedin.com/in/correa-julian/" target="_blank" class="contact-link">LinkedIn</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Julian Correa</span>
+    <span>Diseñado y desarrollado con cuidado.</span>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          // stagger children
+          const siblings = [...e.target.parentElement.querySelectorAll('.fade-in:not(.visible)')];
+          siblings.forEach((s, i) => {
+            setTimeout(() => s.classList.add('visible'), i * 100);
+          });
+        }
+    
